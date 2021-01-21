@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 600px;
+    margin: auto;
+    background-color: #b3e5fb;
+    padding: 10px;
+    
+    .profileHeader {
+        height: 70px;
+        width: 100%;
+        text-align: center;
+        background-color: #7da0af;
+    }
+    .profileBody {
+        width: 100%;
+        background-color: #cbdfdb;
+        
+        .expItem {
+            display: inline-block;   
+            margin: 10px 2px;
+            padding: 5px 16px;
+            background-color: #af7da0; 
+            border-radius: 5px;
+        }
+    }
+    .profileFooter {
+        height: 30px;
+        width: 100%;
+        background-color: #8c7daf;
+        
+        ul {
+            list-style-type: none;
+
+            li {
+                display: inline-block;
+                padding: 5px 0px;
+                margin: 0 15px;
+            }
+        }
+    }
+}
