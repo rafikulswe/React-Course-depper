@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Validation from './validation';
 import Aux from '../../../hoc/Auxilary';
+import AuthContext from '../../../contextApi/auth-context';
 
 class Person extends Component {
     // shouldComponentUpdate = (nextProps, nextState) => {
@@ -22,6 +23,9 @@ class Person extends Component {
         }
         return ( 
             <Aux>
+                <AuthContext.Consumer>
+                    {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>}
+                </AuthContext.Consumer>
                 <h6 onClick={this.props.click}>Name: {this.props.name}</h6>
                 {validMsg}
                 <input 

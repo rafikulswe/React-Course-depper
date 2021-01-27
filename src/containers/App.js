@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Persons from '../components/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass';
+import AuthContext from '../contextApi/auth-context';
 
 class App extends PureComponent {
 	constructor(props) {
@@ -16,6 +17,7 @@ class App extends PureComponent {
 		],
 		showDetails: false,
 		cockpitShow: true,
+		authenticated: false
 	}
 	
 	static getDerivedStateFromProps(props, state) {
@@ -71,6 +73,9 @@ class App extends PureComponent {
 			cockpitShow: !cockpitDidShow
 		});
 	}
+	loginHandler = () => {
+		this.setState({authenticated: true});
+	}
 
 	render() {
 		console.log('[App.js] render..');
@@ -82,11 +87,17 @@ class App extends PureComponent {
 		}
 
 		return(
-			<WithClass classes="App">
-				<button onClick={this.cockpitHandler}>Remove Cockpit</button>
-				{this.state.cockpitShow ? <Cockpit changed={this.conditionalToggle}/> : null}
-				{allPersons}
-			</WithClass>
+			<AuthContext.Provider value={{
+				authenticated: this.state.authenticated,
+				login: this.loginHandler
+			}}>
+				<WithClass classes="App">
+					<button onClick={this.cockpitHandler}>Remove Cockpit</button><br/>
+					<button onClick={this.loginHandler}>Login</button>
+					{this.state.cockpitShow ? <Cockpit changed={this.conditionalToggle}/> : null}
+					{allPersons}
+				</WithClass>
+			</AuthContext.Provider>
 		)
 	};
 }
